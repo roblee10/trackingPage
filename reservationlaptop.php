@@ -30,21 +30,29 @@
 	$stmt = sqlsrv_query($conn,$sql);
 	$row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC);
 
-	$rid = $row[0]+1;	//reservation id
+	$rid = $row[0]+1;	//next reservation id
 	$trackingNumber = $row[1];	//tracking number
 	$trackingNumber = str_pad($rid,"5","0",STR_PAD_LEFT);
 	$trackingNumber =date("ymd").$trackingNumber;
 	$date = date("ymd");
-	
+
 	$sql = "INSERT INTO reservation VALUES ($rid, $trackingNumber, $sid, $id, $date, null)";
 	$stmt = sqlsrv_query($conn,$sql);
-	
+
 	$sql = "UPDATE laptop SET studentid=$sid, available='N' WHERE id = $id";
 	$stmt = sqlsrv_query($conn,$sql);
 
-	$sql = "UPDATE student SET Ordered='Y', Onhand='Y', PickUpDate=$date, ShipDate=$date, trackingNumber=$trackingNumber, received='Y', completed='N', ReturnReceived=NULL WHERE id = $sid";
+	$sql = "SELECT CPU, inches FROM laptop WHERE id = $id";
 	$stmt = sqlsrv_query($conn,$sql);
+	while( $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_NUMERIC) ) {
+		$cpu = $row[0];
+		$inches = $row[1];
+	}
+	$spec = $cpu.' - '.$inches;
 
+
+	$sql = "UPDATE student SET Cpu='$spec', Ordered='Y', Onhand='Y', PickUpDate=$date, ShipDate=$date, TrackingNumber=$trackingNumber, Received='Y', Completed='N', ReturnReceived=NULL WHERE id = $sid";
+	$stmt = sqlsrv_query($conn,$sql);
 
 	$sql = "SELECT * FROM reservation WHERE id = $rid";
 	$stmt = sqlsrv_query($conn,$sql);
@@ -55,6 +63,7 @@
 	<th>Reservation Date</th>
 	<th>Return Date</th>
 	</tr>";
+
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
 		echo "
 		<tr class='clickable-row' data-href='reservationlaptop.php?id=$row[0]'>
