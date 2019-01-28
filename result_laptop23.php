@@ -13,6 +13,7 @@
 				
 				var w = window.open(link, "popupWindow", "width=600, height=400, scrollbars=yes");
 				var $w = $(w.document.body);
+				self.close();
 				
 			}
 			else
@@ -24,6 +25,7 @@
 	});
 
 </script>
+
 </head>
 
 
@@ -65,12 +67,16 @@
 		<td>$row[6]</td>
 		<td>$row[7]</td>
 		</tr>";
+		
 	}
-	echo "</table>";
 	
+	echo "</table>";
 	?>
+	
+	
+	
 	<h1></h1>
-	<input type="button" value="return">
 
+	
 </body>
 </html>
