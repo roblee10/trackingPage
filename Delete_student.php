@@ -44,7 +44,7 @@
 			$row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_NUMERIC);
 			$laptopId = $row[0];
 
-			$sql = "UPDATE laptop set studentid=null, available='Y', returnDate=$date where id=$laptopId";
+			$sql = "UPDATE laptop set studentId=null, available='Y', returnDate=$date where id=$laptopId";
 			$stmt = sqlsrv_query($conn,$sql);
 
 			$sql = "DELETE FROM reservation WHERE studentId=$id_check";
@@ -52,14 +52,9 @@
 
 			$strSQL = "DELETE FROM student WHERE id = ?";
 			$params = array($_POST["chkDel"][$i]);
-			$stmt = sqlsrv_query($conn,$strSQL,$params);
-
-
-				
+			$stmt = sqlsrv_query($conn,$strSQL,$params);		
 		}
-
 	}
-
 	?>
 </body>
 </html>

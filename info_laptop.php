@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +35,7 @@
 	<th>Inches</th>
 	<th>MSOFFICE</th>
 	<th>StudentId</th>
-	<th>returnDate</th>
+	<th>Recevied Date</th>
 	<th>Available</th>
 	</tr>";
 
@@ -47,12 +50,12 @@
 		<td>$row[6]</td>
 		<td>$row[7]</td>
 		</tr>";
-	
+		
 
-	echo "</table>";
+		echo "</table>";
 
-	
-}
+		
+	}
 	include "Edit_laptop.php";
 	
 	?>

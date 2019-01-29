@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +9,11 @@
 	jQuery(document).ready(function($) {
 		$(".clickable-row").click(function() {
 			var link =  $(this).data("href");
-			var w = window.open(link, "popupWindow", "width=600, height=400, scrollbars=yes");
+			var w = window.open(link, "popupWindow", "width=800, height=600, scrollbars=yes");
 			var $w = $(w.document.body);
 			$w.html("<textarea></textarea>");
 		});
-	});
+	}); 
 
 	function submit_form() {
 		document.frm.target = 'ifrm';
@@ -80,7 +73,7 @@
 
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
 		echo "
-		<tr class='clickable-row' data-href='info_student.php?id=$row[0]'>
+		<tr class='clickable-row' data-href='info_student.php?sid=$row[0]'>
 		<td><input type='checkbox' name='chkDel[]' value=$row[0]></td>
 		<td>$row[0]</td>
 		<td>$row[1]</td>

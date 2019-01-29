@@ -53,7 +53,9 @@
 	<td><input type="text" name="txtStartdate" value="<?php echo $row[6];?>"></td></tr>
 	<tr>
 	<th width="50">Service Tag</th>
-	<td><input type="text" name="txtTag" value="<?php echo $row[8];?>"></td></tr>
+	<td><input type="text" name="txtTag" value="<?php echo $row[8];?>">
+		<button type="button" onclick="window.open('result_laptop23.php?studentNumber=<?php echo $row[2];?>','window_name','width=400,height=500,location=no,status=no,scrollbars=yes');">Assign</button>
+	</td></tr>
 	<tr>
 	<th width="50">Notes</th>
 	<td><input type="text" name="txtNotes" value="<?php echo $row[9];?>"></td></tr>
@@ -82,14 +84,31 @@
 	<th width="50">CPU</th>
 
 	<td><input type="text" name="txtCpu" value="<?php echo $row[11];?>">
-		<input type="button" onclick="window.open('result_laptop23.php?id=<?php echo $row[2];?>','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');" value='button'>
+		
 	</td>
 
 
 	</tr>
 	<tr>
 	<th width="50">Added to Ledger</th>
-	<td><input type="text" name="txtAddtoLed" value="<?php echo $row[12];?>"></td></tr>
+		<?php
+				
+				echo (\strpos($row[12], 'Y') !== false) ?
+				'<td>
+				<input type="radio" name="txtAddtoLed" checked value="Y">
+				<label for="txtAddtoLed">Y</label>
+				<input type="radio" name="txtAddtoLed" value="N">
+				<label for="txtAddtoLed">N</label>
+				</td>'
+				:
+				'<td>
+				<input type="radio" name="txtAddtoLed" value="Y">
+				<label for="txtAddtoLed">Y</label>
+				<input type="radio" name="txtAddtoLed" checked value="N">
+				<label for="txtAddtoLed">N</label>
+				</td>';
+
+				?></tr>
 	<tr>
 	<th width="50">Ordered</th>
 	<?php
@@ -172,10 +191,14 @@
 				?></tr>
 	<tr>
 	<th width="50">Pick Up Date</th>
-	<td><input type="text" name="txtPickUpDate" value="<?php echo $row[17];?>"></td></tr>
+	<td>
+		<input type="date" name="txtPickUpDate" min="2018-01" max="2020-12" class="form-control" value="<?php echo $row[17];?>"/>	<!-- <input type="text" name="txtPickUpDate" value="<?php echo $row[17];?>"> -->
+	</td></tr>
 	<tr>
 	<th width="50">Ship Date</th>
-	<td><input type="text" name="txtShipDate" value="<?php echo $row[18];?>"></td></tr>
+	<td>
+		<input type="date" name="txtShipDate" min="2018-01" max="2020-12" class="form-control" value="<?php echo $row[18];?>"/>
+	</td></tr>
 	<tr>
 	<th width="50">Tracking Number</th>
 	<td><input type="text" name="txtTrackingNumber" value="<?php echo $row[19];?>"></td></tr>
